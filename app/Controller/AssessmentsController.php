@@ -1,6 +1,6 @@
 <?php
 class AssessmentsController extends AppController {
-	var $uses = array('Client','Assessment','Indicator');
+	var $uses = array('Client','Assessment','Indicator','Sector');
 
 	public function edit( $assessment_id=NULL ){
 		if( is_null($assessment_id) ){
@@ -33,17 +33,21 @@ class AssessmentsController extends AppController {
 		$this->set('env_indicators', $env_indicators);
 		$this->set('soc_indicators', $soc_indicators);
 		$this->set('gov_indicators', $gov_indicators);
+		$this->set('sectors', $this->Sector->find('threaded')); 		
 		$this->render('edit');
 	}	
 
 	public function add( ){
-		$client = $this->Client->findById($this->data['client_id']);
-		$this->set('client', $client);
-		return $this->edit();
+		$this->Assessment->save($this->request->data);
+		$this->Session->setFlash(__('Saved Successfully'));
+		return $this->redirect('/assessments/edit/'.$this->Assessment->id);
 	}
 
-	public function save(){
-
+	public function delete( $assessment_id ){
+		$assessment = $this->Assessment->findById($assessment_id);
+		$this->Assessment->delete($assessment_id);
+		$this->Session->setFlash(__('Deleted Successfully'));
+		return $this->redirect('/clients/view/'.$assessment['Client']['id']);
 	}
 
 

@@ -53,6 +53,7 @@
 					<th>Business Units</th>
 					<th>Status</th>
 					<th>Created</th>
+					<th width="1%">&nbsp;</th>
 		        </tr>
 		      </thead>
 		      <tbody>
@@ -63,6 +64,9 @@
 		      		<td><?= count($assessment['BusinessUnit']); ?></td>
 		      		<td><?= $assessment['status']; ?></td>
 		      		<td><?= $assessment['created']; ?></td>
+			  		<td>
+			  			<a href="/assessments/delete/<?= $assessment['id']; ?>" class="btn btn-mini btn-danger" onClick="return confirm('Are you sure you want to delete this assessment?')"><i class="icon-remove"></i></a>
+			  		</td>
 		      	</tr>
 		      	<?php endforeach; ?>
 		      	<?php if( empty($client['Assessment']) ): ?>
@@ -72,13 +76,9 @@
 		      	<?php endif; ?>
 		      </tbody>
 		    </table>
-		    
-		    <form action="/assessments/add/" method="post">
-		    	<input type="hidden" name="client_id" value="<?= $client['Client']['id']; ?>" />
-		    	<button type="submit" class="btn btn-small btn-success">	
-		    		<i class="icon-plus"></i> Create Assessment		    		
-		    	</button>
-		    </form>
+		    <a href="#add_assessment" role="button" class="btn btn-small btn-success" data-toggle="modal">
+		    	<i class="icon-plus"></i> Create Assessment
+		    </a>
 		  </div>
 		  <!-- ASSESSMENT TAB -->
 
@@ -122,6 +122,7 @@
 	</div>
 </div>
 
+<!-- EDIT CLIENT -->
 <div id="add_client" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   	<?php 
 		echo $this->Form->create(NULL, array(
@@ -168,8 +169,61 @@
 
 	  </div>
 	  <div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 	    <input type="submit" class="btn btn-success" value="Save" />
+	    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
 	  </div>
 	</form>
 </div>
+<!-- EDIT CLIENT -->
+
+
+<!-- CREATE ASSESSMENT -->
+<div id="add_assessment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  	<?php 
+		echo $this->Form->create(NULL, array(
+		    'url' => '/assessments/add',
+		    'class' => 'form-horizontal',
+		    'inputDefaults' => array(
+		        'label' => false,
+		        'div' => false
+		    )
+		));
+  	?>
+  	<?= $this->Form->hidden('Assessment.client_id', array('default'=>$client['Client']['id'])); ?>
+
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Create Assessment</h3>
+	  </div>
+	  <div class="modal-body">
+	  	
+		  <div class="control-group">
+		    <label class="control-label" for="name">Name</label>
+		    <div class="controls">
+		      <?= $this->Form->input('Assessment.name', array('placeholder'=>'Assessment Name','required')); ?>
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="address">Industry</label>
+		    <div class="controls">
+		    	<select name="Assessment[sector_id]" required>
+		    		<option value="">-- Select Industry --</option>
+			    	<?php foreach( $sectors as $sector ): ?>
+			    	<optgroup label="<?= $sector['Sector']['name']; ?>">
+			    		<?php foreach( $sector['children'] as $industry ): ?>
+			    		<option value="<?= $industry['Sector']['id']; ?>"><?= $industry['Sector']['name']; ?></option>
+			    		<?php endforeach; ?>
+			    	</optgroup>
+			    	<?php endforeach; ?>
+		    	</select>
+		    </div>
+		  </div>
+
+	  </div>
+	  <div class="modal-footer">
+	    <input type="submit" class="btn btn-success" value="Save" />
+	    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	  </div>
+	</form>
+</div>
+<!-- CREATE ASSESSMENT -->
