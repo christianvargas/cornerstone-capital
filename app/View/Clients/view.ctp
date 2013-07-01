@@ -38,8 +38,8 @@
 <div class="row-fluid section">
 	<div class="span12">
 		<ul class="nav nav-tabs" id="myTab">
-		  <li class="active"><a href="#assessments">Assessments</a></li>
-		  <li><a href="#projects">Projects</a></li>
+		  <li class="active"><a href="#assessments">Assessments <span class="badge hide"><?= count($client['Assessment']); ?></span></a></li>
+		  <li><a href="#projects">Projects <span class="badge hide"><?= count($client['Project']); ?></span></a></li>
 		</ul>
 		 
 		<div class="tab-content">

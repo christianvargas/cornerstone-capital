@@ -20,5 +20,11 @@ class ProjectsController extends AppController {
 		$this->Session->setFlash(__('Saved Successfully'));
 		return $this->redirect('/projects/view/'.$project_id);
 	}
+
+	public function delete( $project_id ){
+		$this->Project->delete($project_id);
+		$this->Session->setFlash(__('Saved Successfully'));
+		return $this->redirect('/projects');
+	}
 }
 ?>

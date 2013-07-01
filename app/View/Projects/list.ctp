@@ -2,9 +2,11 @@
 	<div class="span12">		
 		<h3 style="float:none;">Projects</h3>
 		<h5>List of all projects</h5>
+		<!--
         <a href="/projects/new" class="btn-glow icon primary pull-right">
             <i class="icon-plus"></i> Add New Project
-        </a>		
+        </a>
+        -->		
 	</div>
 </div>
 
@@ -19,6 +21,7 @@
 		      <th>Category</th>
 		      <th>Status</th>
 		      <th>Created</th>
+		      <th width="1%">&nbsp;</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -30,11 +33,14 @@
 		  		<td>Category <?= $project['Project']['category']; ?></td>
 		  		<td><?= $project['Project']['status']; ?></td>
 		  		<td><?= $project['Project']['created']; ?></td>
+		  		<td>
+		  			<a href="/projects/delete/<?= $project['Project']['id']; ?>" class="btn btn-mini btn-danger" onClick="return confirm('Are you sure you want to delete this project?')"><i class="icon-remove"></i></a>
+		  		</td>
 		  	</tr>
 		  	<?php endforeach; ?>
 		  	<?php if( empty($projects) ): ?>
 		  	<tr>
-		  		<td colspan="6">No projects found.</td>
+		  		<td colspan="10">No projects found.</td>
 		  	</tr>
 		  	<?php endif; ?>	
 		  </tbody>

@@ -47,31 +47,27 @@
 		<table class="table table-highlight table-condensed">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Environmental</th>
-					<th>Social</th>
-					<th>Governance</th>
-					<th>Indicators</th>
+					<th width="30%">Name</th>
+					<th width="10%">Environmental</th>
+					<th width="10%">Social</th>
+					<th width="10%">Governance</th>
+					<th width="10%">Custom</th>
+					<th width="10%">Total KPI</th>
 					<th>Created</th>
 					<th width="1%">&nbsp;</th>
 				</tr>				
 			</thead>
 			<tbody>
-				<?php foreach( $assessment['BusinessUnit'] as $business_unit ): ?>
+				<?php foreach( $bunits as $business_unit ): ?>
 				<tr>
-					<td><?= $business_unit['name']; ?></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><?= count($business_unit['BusinessUnitIndicator']); ?></td>
-					<td><?= $business_unit['created']; ?></td>
-					<td style="white-space:nowrap;">
-						<!--
-						<a href="#" class="btn btn-mini btn-primary"><i class="icon-pencil"></i></a>
-						&nbsp;
-					-->
-						<a href="#" class="btn btn-mini btn-danger"><i class="icon-remove"></i></a>						
-					</td>
+					<td><a class="edit_unit_link" data-target="#myModal" href="/assessments/bunit/<?= $business_unit['BusinessUnit']['id']; ?>" data-toggle="modal"><?= $business_unit['BusinessUnit']['name']; ?></a></td>
+					<td><?= $business_unit['BusinessUnit']['num_e']; ?></td>
+					<td><?= $business_unit['BusinessUnit']['num_s']; ?></td>
+					<td><?= $business_unit['BusinessUnit']['num_g']; ?></td>
+					<td><?= $business_unit['BusinessUnit']['num_custom']; ?></td>
+					<td><?= $business_unit['BusinessUnit']['total_kpi']; ?></td>
+					<td><?= $business_unit['BusinessUnit']['created']; ?></td>
+					<td><a href="/assessments/delete_unit/<?= $business_unit['BusinessUnit']['id']; ?>" class="btn btn-mini btn-danger" onClick="return confirm('Are you sure you want to delete this business unit?')"><i class="icon-remove"></i></a></td>
 				</tr>
 				<?php endforeach; ?>
 				<?php if( empty($assessment['BusinessUnit']) ): ?>
@@ -81,7 +77,10 @@
 				<?php endif; ?>
 			</tbody>
 		</table>
-		<a href="#add_team" role="button" class="btn btn-small btn-success" data-toggle="modal"><i class="icon-plus"></i> Add New</a>
+		
+		<!-- Add new -->
+		<a data-target="#myModal" href="/assessments/bunit" class="btn btn-small btn-success" data-toggle="modal"><i class="icon-plus"></i> Add New</a>
+
 	</div>
 
 	<div class="span7">
@@ -89,93 +88,6 @@
 	</div>
 </div>
 
-<div id="add_team" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<?php
-	echo $this->Form->create('User', array(
-	    'inputDefaults' => array(
-	        'label' => false,
-	        'div' => false
-	    ),
-	    'class' => 'form-inline'
-	));
-	?>
-	<div class="modal-header">
-	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-	    <h3 id="myModalLabel">Add Business Unit</h3>
-	  </div>
-	  <div class="modal-body" style="max-height:500px;">
-
-	  	<div style="margin-bottom: 10px;">
-	  		<input type="text" name="assessment[name]" placeholder="Name" required />
-	  	</div>
-
-        <div class="accordion" id="accordion2">
-              <div class="accordion-group">
-                <div class="accordion-heading relative">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                    Environmental <span class="badge"><?= count($env_indicators); ?></span>
-                  </a>
-                </div>
-                <div id="collapseOne" class="accordion-body collapse">
-                  <div class="accordion-inner">
-
-                  		<?php foreach( $env_indicators as $indicator ): ?>
-                  			<div style="margin-bottom: 4px;">
-                  				<?= $this->Form->checkbox('indicator.'.$indicator['Indicator']['id'], array('hiddenField' => false)); ?>
-                  				<?= $this->Form->label('indicator.'.$indicator['Indicator']['id'], '<span class="label" style="font-size: 12px;">'.$indicator['Indicator']['indicator'].'</span> '.$indicator['Indicator']['name'], array('style'=>'display:inline; font-size:12px;')); ?>
-                  			</div>
-                  		<?php endforeach; ?>
-
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-group">
-                <div class="accordion-heading relative">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                    Social <span class="badge"><?= count($soc_indicators); ?></span>
-                  </a>
-                </div>
-                <div id="collapseTwo" class="accordion-body collapse">
-                  <div class="accordion-inner">
-
-                  		<?php foreach( $soc_indicators as $indicator ): ?>
-                  			<div style="margin-bottom: 4px;">
-                  				<?= $this->Form->checkbox('indicator.'.$indicator['Indicator']['id'], array('hiddenField' => false)); ?>
-                  				<?= $this->Form->label('indicator.'.$indicator['Indicator']['id'], '<span class="label" style="font-size: 12px;">'.$indicator['Indicator']['indicator'].'</span> '.$indicator['Indicator']['name'], array('style'=>'display:inline; font-size:12px;')); ?>
-                  			</div>
-                  		<?php endforeach; ?>
-
-                  </div>
-                </div>
-              </div>
-              <div class="accordion-group">
-                <div class="accordion-heading relative">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                    Governance <span class="badge"><?= count($gov_indicators); ?></span>
-                  </a>
-                </div>
-                <div id="collapseThree" class="accordion-body collapse">
-                  <div class="accordion-inner">
-
-                  		<?php foreach( $gov_indicators as $indicator ): ?>
-                  			<div>
-                  				<?= $this->Form->checkbox('indicator.'.$indicator['Indicator']['id'], array('hiddenField' => false)); ?>
-                  				<?= $this->Form->label('indicator.'.$indicator['Indicator']['id'], '<span class="label" style="font-size: 12px;">'.$indicator['Indicator']['indicator'].'</span> '.$indicator['Indicator']['name'], array('style'=>'display:inline; font-size:12px;')); ?>
-                  			</div>
-                  		<?php endforeach; ?>
-
-                  </div>
-                </div>
-              </div>
-        </div>
-
-	  </div>
-	  <div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    <input type="submit" class="btn btn-success" value="Save" />
-	  </div>
-	</form>
-</div>
 
 <!-- EDIT ASSESSMENT -->
 <div id="edit_assessment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
@@ -227,3 +139,34 @@
 	</form>
 </div>
 <!-- EDIT ASSESSMENT -->
+
+<div class="modal fade hide" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<?php
+	echo $this->Form->create('Assessment', array(
+		'url' => '/assessments/add_unit',
+	    'inputDefaults' => array(
+	        'label' => false,
+	        'div' => false
+	    ),
+	    'class' => 'form-inline'
+	));
+	?>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Add Business Unit</h3>
+  </div>
+  <div class="modal-body" style="max-height:500px;">
+    
+  </div>
+  <div class="modal-footer">
+        <?= $this->Form->hidden('BusinessUnit.assessment_id', array('default'=>$assessment['Assessment']['id'])); ?>
+	    <input type="submit" class="btn btn-success" value="Save" />
+	    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+  </div>
+</div>
+
+<script>
+	$('body').on('hidden', '.modal', function () {
+	 	$(this).removeData('modal');
+	});	
+</script>
