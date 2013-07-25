@@ -43,7 +43,7 @@
 
 <div class="row-fluid section">
 	<div class="span12">
-		<h4>Business Units</span></h4>
+		<h4>Business Units </span></h4>
 		<table class="table table-highlight table-condensed">
 			<thead>
 				<tr>
