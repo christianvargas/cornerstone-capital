@@ -6,10 +6,10 @@
                 <span class="icon-bar"></span>
             </button>
             
-            <a class="brand" href="index-2.html">Sustainable Banking</a>
+            <a class="brand" href="/clients">Cornerstone Capital</a>
 
             <ul class="nav pull-right">                
-                <li class="hidden-phone">
+                <li class="hidden-phone hide">
                     <input class="search" type="text" />
                 </li>
                 <li class="notification-dropdown hidden-phone hide">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </li>
-                <li class="notification-dropdown hidden-phone">
+                <li class="notification-dropdown hidden-phone hide">
                     <a href="#" class="trigger">
                         <i class="icon-envelope-alt"></i>
                     </a>
@@ -109,14 +109,14 @@
                         <li><a href="#">Send feedback</a></li>
                     </ul>
                 </li>
-                <li class="settings hidden-phone">
+                <li class="settings hidden-phone hide">
                     <a href="personal-info.html" role="button">
                         <i class="icon-cog"></i>
                     </a>
                 </li>
                 <li class="settings hidden-phone">
                     <a href="/login/logout" role="button">
-                        <i class="icon-share-alt"></i>
+                        <i class="icon-share-alt"></i> Logout
                     </a>
                 </li>
             </ul>            

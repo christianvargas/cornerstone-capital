@@ -16,11 +16,13 @@
                 'icon' => 'icon-flag',
                 'link' => '/indicators',
             ),
+            /*
             array(
                 'name' => 'Reports',
                 'icon' => 'icon-signal',
                 'link' => '/reports',
             ),
+            */
         );
     ?>
 

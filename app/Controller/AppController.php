@@ -35,7 +35,7 @@ class AppController extends Controller {
 
 	// Pass settings in $components array
 	public $components = array(
-		'DebugKit.Toolbar',
+		// 'DebugKit.Toolbar',
         'Session',
 	    'Auth' => array(
 	        'loginAction' => array(
