@@ -67,8 +67,8 @@
                 <span class="icon-bar"></span>
             </button>
             
-            <a class="brand" href="/projects.php" style="float:none; text-align:center;" >
-                Sustainable Banking
+            <a class="brand" href="/login" style="float:none; text-align:center;" >
+                Cornerstone Capital
             </a>        
         </div>
     </div>
