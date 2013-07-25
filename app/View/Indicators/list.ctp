@@ -2,7 +2,7 @@
 	<div class="span12">		
 		<h3 style="float:none;">Key Performance Indicators</h3>
 		<h5>List of all KPIs</h5>
-	    <a href="#add_client" role="button" class="btn btn-small btn-success pull-right" data-toggle="modal">
+	    <a href="/indicators/add/" role="button" class="btn btn-small btn-success pull-right" data-target="#myModal" data-toggle="modal">
 	    	<i class="icon-plus"></i> Add New
 	    </a>
 	</div>

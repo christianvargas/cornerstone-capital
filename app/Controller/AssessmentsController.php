@@ -64,6 +64,7 @@ class AssessmentsController extends AppController {
 		$env_indicators = array();
 		$soc_indicators = array();
 		$gov_indicators = array();
+		$custom_indicators = array();
 		foreach( $indicators as $indicator ){
 			switch( substr($indicator['Indicator']['indicator'], 0, 1) ){
 				case 'E':
@@ -75,6 +76,8 @@ class AssessmentsController extends AppController {
 				case 'G':
 					$gov_indicators[] = $indicator;
 					break;
+				default:
+					$custom_indicators[] = $indicator;
 			}
 		}
 
@@ -83,6 +86,7 @@ class AssessmentsController extends AppController {
 		$this->set('env_indicators', $env_indicators);
 		$this->set('soc_indicators', $soc_indicators);
 		$this->set('gov_indicators', $gov_indicators);
+		$this->set('custom_indicators', $custom_indicators);
 		$this->layout = 'ajax';
 		$this->render('businessunit');
 	}

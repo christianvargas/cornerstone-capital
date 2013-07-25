@@ -62,6 +62,27 @@
                   </div>
                 </div>
               </div>
+              <?php if( count($custom_indicators) > 0 ): ?>
+              <div class="accordion-group">
+                <div class="accordion-heading relative">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                    Custom <span class="badge"><span id="C_selected">0</span> / <?= count($custom_indicators); ?></span>
+                  </a>
+                </div>
+                <div id="collapseFour" class="accordion-body collapse">
+                  <div class="accordion-inner">
+
+                      <?php foreach( $custom_indicators as $indicator ): ?>
+                        <div>
+                          <?= $this->Form->checkbox('indicator.'.$indicator['Indicator']['id'], array('data-type'=>'C', 'hiddenField' => false, 'checked'=>(array_key_exists($indicator['Indicator']['id'], $indicators) ? TRUE : FALSE))); ?>
+                          <?= $this->Form->label('indicator.'.$indicator['Indicator']['id'], '<span class="label" style="font-size: 12px;">'.$indicator['Indicator']['indicator'].'</span> '.$indicator['Indicator']['name'], array('style'=>'display:inline; font-size:12px;')); ?>
+                        </div>
+                      <?php endforeach; ?>
+
+                  </div>
+                </div>
+              </div>
+              <?php endif; ?>
         </div>
 
         <?= $this->Form->hidden('BusinessUnit.id', array('default'=>$business_unit['BusinessUnit']['id'])); ?>
@@ -72,6 +93,7 @@ var countChecked = function() {
   $('#E_selected').html($( "input[data-type=E]:checked" ).length);
   $('#S_selected').html($( "input[data-type=S]:checked" ).length);
   $('#G_selected').html($( "input[data-type=G]:checked" ).length);
+  $('#C_selected').html($( "input[data-type=C]:checked" ).length);
 };
 countChecked();
  

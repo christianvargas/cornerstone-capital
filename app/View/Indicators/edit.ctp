@@ -1,7 +1,7 @@
       <div class="control-group">
         <label class="control-label" for="name">Code</label>
         <div class="controls">
-          <?= $this->Form->input('Indicator.indicator', array('default'=>$indicator['Indicator']['indicator'], 'placeholder'=>'Unique Code','required','label'=>false, 'style'=>'width:60px;')); ?>
+          <?= $this->Form->input('Indicator.indicator', array('default'=>$indicator['Indicator']['indicator'], 'placeholder'=>'','required','label'=>false, 'style'=>'width:60px;')); ?>
         </div>
       </div>
       <div class="control-group">
