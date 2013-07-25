@@ -15,10 +15,10 @@ class ProjectsController extends AppController {
 		$this->set('team_members', $team_members);
 	}
 
-	public function add( $project_id=NULL ){
-		$this->Project->Team->save($_POST);
+	public function add(){
+		$this->Project->save($this->request->data);
 		$this->Session->setFlash(__('Saved Successfully'));
-		return $this->redirect('/projects/view/'.$project_id);
+		return $this->redirect('/projects/view/'.$this->Project->id);
 	}
 
 	public function delete( $project_id ){

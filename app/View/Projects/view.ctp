@@ -6,6 +6,39 @@
 
 <div class="row-fluid section">
 	<div class="span5 well">
+		<div class ="row-fluid">
+			<div class="span3">
+				<span class="pull-right" style="font-weight:bold;">Project</span>
+			</div>
+			<div class="span9">
+				<?= $project['Project']['name']; ?>
+			</div>
+		</div>
+		<div class ="row-fluid">
+			<div class="span3">
+				<span class="pull-right" style="font-weight:bold;">Client</span>
+			</div>
+			<div class="span9">
+				<?= $project['Client']['name']; ?>
+			</div>
+		</div>
+		<div class ="row-fluid">
+			<div class="span3">
+				<span class="pull-right" style="font-weight:bold;">Address</span>
+			</div>
+			<div class="span9">
+				<?= $project['Client']['address']; ?> <br />
+				<?= $project['Client']['city']; ?>, <?= $project['Client']['state']; ?> <?= $project['Client']['zip']; ?> <br />
+				<?= $project['Client']['country']; ?>
+			</div>
+		</div>
+		<div class ="row-fluid" style="margin-top: 8px;">
+			<div class="span0 offset3">
+			    <a href="#edit_project" role="button" class="btn btn-small btn-primary" data-toggle="modal">
+			    	<i class="icon-pencil"></i> Edit
+			    </a>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -112,3 +145,40 @@
 	  </div>
 	</form>
 </div>
+
+
+<!-- EDIT PROJECT -->
+<div id="edit_project" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  	<?php 
+		echo $this->Form->create(NULL, array(
+		    'url' => '/projects/add',
+		    'class' => 'form-horizontal',
+		    'inputDefaults' => array(
+		        'label' => false,
+		        'div' => false
+		    )
+		));
+  	?>
+  	<?= $this->Form->hidden('Project.id', array('default'=>$project['Project']['id'])); ?>
+
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	    <h3 id="myModalLabel">Edit Project</h3>
+	  </div>
+	  <div class="modal-body">
+	  	
+		  <div class="control-group">
+		    <label class="control-label" for="name">Name</label>
+		    <div class="controls">
+		      <?= $this->Form->input('Project.name', array('default'=>$project['Project']['name'], 'placeholder'=>'Project Name')); ?>
+		    </div>
+		  </div>
+
+	  </div>
+	  <div class="modal-footer">
+	    <input type="submit" class="btn btn-success" value="Save" />
+	    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	  </div>
+	</form>
+</div>
+<!-- EDIT PROJECT -->
